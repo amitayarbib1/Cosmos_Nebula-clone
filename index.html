@@ -1,374 +1,1227 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>חיות כיס | מנוע חיפוש חכם לפודקאסט</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmos — Stream Smarter</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131c;
+    --surface2: #1c1c2a;
+    --accent: #c8a96e;
+    --accent2: #e8c98e;
+    --text: #f0ede8;
+    --text-muted: #888098;
+    --border: rgba(200,169,110,0.15);
+    --player-bg: #000;
+  }
 
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --surface2: #22263a;
-      --accent: #6c63ff;
-      --accent2: #a78bfa;
-      --text: #f0f0f5;
-      --text-muted: #8b8fa8;
-      --border: #2e3350;
-      --radius: 14px;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'Heebo', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    /* ── HEADER ── */
-    header {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 32px;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: linear-gradient(to bottom, rgba(10,10,15,0.95), transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
 
-    .logo-small {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.15rem;
-      color: var(--text);
-      text-decoration: none;
-    }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    text-decoration: none;
+  }
 
-    .logo-small img {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      object-fit: cover;
-    }
+  .logo span { color: var(--text); }
 
-    .logo-icon {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #6c63ff, #a78bfa);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-    }
+  nav ul {
+    list-style: none;
+    display: flex; gap: 2.5rem;
+  }
 
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.92rem;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: var(--text); }
+  nav ul a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
 
-    /* ── HERO ── */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 24px 60px;
-      width: 100%;
-      max-width: 760px;
-    }
+  nav ul a:hover { color: var(--text); }
 
-    .hero-logo {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #6c63ff 0%, #a78bfa 50%, #f472b6 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      margin-bottom: 28px;
-      box-shadow: 0 0 60px rgba(108,99,255,0.35);
-      animation: pulse 3s ease-in-out infinite;
-    }
+  .nav-right { display: flex; gap: 1rem; align-items: center; }
 
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 60px rgba(108,99,255,0.35); }
-      50% { box-shadow: 0 0 90px rgba(108,99,255,0.6); }
-    }
+  .btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+  }
 
-    .hero h1 {
-      font-size: clamp(1.5rem, 4vw, 2.1rem);
-      font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
 
-    .hero p {
-      color: var(--text-muted);
-      font-size: 1rem;
-      margin-bottom: 36px;
-    }
+  .btn-ghost:hover { color: var(--text); border-color: rgba(200,169,110,0.4); }
 
-    /* ── SEARCH ── */
-    .search-wrap {
-      width: 100%;
-      max-width: 620px;
-      position: relative;
-      margin-bottom: 20px;
-    }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0f;
+  }
 
-    .search-input {
-      width: 100%;
-      padding: 18px 60px 18px 24px;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: 50px;
-      color: var(--text);
-      font-family: 'Heebo', sans-serif;
-      font-size: 1.05rem;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      direction: rtl;
-    }
-    .search-input::placeholder { color: var(--text-muted); }
-    .search-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(108,99,255,0.15);
-    }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
 
-    .search-btn {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--accent);
-      border: none;
-      border-radius: 50%;
-      width: 42px; height: 42px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
-      color: white;
-      font-size: 1.1rem;
-    }
-    .search-btn:hover { background: var(--accent2); transform: translateY(-50%) scale(1.05); }
+  /* HERO */
+  .hero {
+    padding: 9rem 3rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
 
-    /* ── RANDOM BTN ── */
-    .random-btn {
-      background: none;
-      border: 1.5px solid var(--border);
-      color: var(--text-muted);
-      padding: 12px 28px;
-      border-radius: 50px;
-      font-family: 'Heebo', sans-serif;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .random-btn:hover {
-      border-color: var(--accent2);
-      color: var(--accent2);
-      background: rgba(108,99,255,0.07);
-    }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    background: rgba(200,169,110,0.12);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
 
-    /* ── RESULTS AREA ── */
-    .results-section {
-      width: 100%;
-      max-width: 760px;
-      padding: 0 24px 60px;
-      display: none;
-    }
-    .results-section.visible { display: block; }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease infinite;
+  }
 
-    .results-label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
 
-    .episode-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 22px;
-      margin-bottom: 14px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s, transform 0.15s;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      text-align: right;
-    }
-    .episode-card:hover {
-      border-color: var(--accent);
-      background: var(--surface2);
-      transform: translateY(-1px);
-    }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    line-height: 1.08;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
 
-    .ep-num {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: white;
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
 
-    .ep-info h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
+  .hero p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
 
-    .ep-info p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; }
 
-    .ep-meta {
-      margin-top: 10px;
-      display: flex;
-      gap: 14px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
+  .hero-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-left: 1rem;
+  }
 
-    /* ── FOOTER ── */
-    footer {
-      margin-top: auto;
-      padding: 24px;
-      color: var(--text-muted);
-      font-size: 0.82rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      width: 100%;
-    }
-    footer a { color: var(--accent2); text-decoration: none; }
+  /* FEATURED PLAYER */
+  .featured-player {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+  }
 
-    /* responsive */
-    @media (max-width: 520px) {
-      header { padding: 14px 18px; }
-      .hero { padding: 50px 18px 40px; }
-    }
-  </style>
+  /* CUSTOM VIDEO PLAYER */
+  .video-container {
+    position: relative;
+    background: #000;
+    aspect-ratio: 16/9;
+    cursor: pointer;
+  }
+
+  .video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Poster / Thumbnail overlay */
+  .video-poster {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.3s;
+  }
+
+  .video-poster.hidden { opacity: 0; pointer-events: none; }
+
+  .poster-content { text-align: center; }
+
+  .poster-thumb {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    position: absolute; inset: 0;
+  }
+
+  .poster-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,10,20,0.7), rgba(15,52,96,0.5));
+  }
+
+  .poster-text {
+    position: relative; z-index: 1;
+    padding: 2rem;
+  }
+
+  .poster-text h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .poster-text p { color: var(--text-muted); font-size: 0.85rem; }
+
+  /* Big play button */
+  .big-play-btn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: rgba(200,169,110,0.9);
+    border: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    z-index: 5;
+    backdrop-filter: blur(4px);
+  }
+
+  .big-play-btn:hover { background: var(--accent2); transform: translate(-50%, -50%) scale(1.1); }
+
+  .big-play-btn svg { width: 28px; height: 28px; fill: #0a0a0f; margin-left: 4px; }
+
+  /* CONTROLS */
+  .player-controls {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1rem 1rem 0.8rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    transform: translateY(0);
+    transition: opacity 0.3s;
+    z-index: 10;
+  }
+
+  .video-container:not(:hover) .player-controls { opacity: 0; }
+  .video-container:hover .player-controls { opacity: 1; }
+  .video-container.paused .player-controls { opacity: 1 !important; }
+
+  /* Progress bar */
+  .progress-wrap {
+    position: relative; height: 4px; margin-bottom: 0.75rem;
+    cursor: pointer;
+  }
+
+  .progress-wrap:hover { height: 6px; margin-bottom: calc(0.75rem - 2px); }
+
+  .progress-bg {
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.1s linear;
+    position: relative;
+  }
+
+  .progress-fill::after {
+    content: '';
+    position: absolute; right: -6px; top: 50%;
+    transform: translateY(-50%);
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent2);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .progress-wrap:hover .progress-fill::after { opacity: 1; }
+
+  .progress-buffered {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    width: 0%;
+  }
+
+  /* Controls row */
+  .controls-row {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+
+  .ctrl-btn {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,0.85);
+    padding: 0.3rem;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .ctrl-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
+
+  .ctrl-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+  .time-display {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.7);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    margin: 0 0.25rem;
+  }
+
+  .volume-wrap {
+    display: flex; align-items: center; gap: 0.4rem;
+    position: relative;
+  }
+
+  .volume-slider {
+    -webkit-appearance: none;
+    width: 70px; height: 3px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.25);
+    outline: none;
+    cursor: pointer;
+    transition: width 0.2s;
+  }
+
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .spacer { flex: 1; }
+
+  .quality-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 3px;
+    padding: 0.15rem 0.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* GRID SECTIONS */
+  .section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+  }
+
+  .section-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem;
+  }
+
+  .section-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .section-link:hover { border-color: var(--accent); }
+
+  /* VIDEO CARDS */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .video-card {
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border-color: rgba(200,169,110,0.3);
+  }
+
+  .card-thumb {
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-thumb-bg {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    transition: transform 0.3s;
+  }
+
+  .video-card:hover .card-thumb-bg { transform: scale(1.05); }
+
+  .card-duration {
+    position: absolute; bottom: 0.5rem; right: 0.5rem;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.2rem 0.45rem;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+  }
+
+  .card-info { padding: 1rem; }
+
+  .card-channel {
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* FEATURED ROW */
+  .featured-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .featured-card {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    aspect-ratio: 16/9;
+    transition: transform 0.2s;
+  }
+
+  .featured-card:hover { transform: scale(1.02); }
+
+  .featured-card-bg {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+
+  .featured-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 40%, transparent);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.2rem;
+  }
+
+  .featured-card .card-channel {
+    font-size: 0.68rem; margin-bottom: 0.3rem;
+  }
+
+  .featured-card .card-title {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+
+  /* CHANNELS */
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .channel-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .channel-card:hover {
+    border-color: rgba(200,169,110,0.4);
+    background: var(--surface2);
+    transform: translateY(-2px);
+  }
+
+  .channel-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+  }
+
+  .channel-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .channel-count {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 3rem;
+  }
+
+  /* CTA */
+  .cta-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .cta-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section h2 em { color: var(--accent); font-style: italic; }
+
+  .cta-section p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+
+  .pricing-card.featured-pricing {
+    border-color: rgba(200,169,110,0.5);
+    background: rgba(200,169,110,0.06);
+    position: relative;
+  }
+
+  .pricing-card.featured-pricing::before {
+    content: 'BEST VALUE';
+    position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #0a0a0f;
+    font-size: 0.6rem; font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.6rem; border-radius: 100px;
+  }
+
+  .pricing-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .pricing-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .pricing-price span { font-size: 0.9rem; color: var(--text-muted); font-family: 'DM Sans', sans-serif; }
+
+  .pricing-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+  }
+
+  .footer-logo span { color: var(--text); }
+
+  footer p { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* TOAST / OVERLAY for big player modal */
+  .player-modal {
+    display: none;
+    position: fixed; inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.92);
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+  }
+
+  .player-modal.open { display: flex; }
+
+  .modal-inner {
+    width: 90vw;
+    max-width: 1100px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 60px 120px rgba(0,0,0,0.8);
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    z-index: 20;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    transition: background 0.2s;
+  }
+
+  .modal-close:hover { background: rgba(255,255,255,0.15); }
+
+  /* BG Stars */
+  .stars {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    animation: twinkle var(--d, 4s) ease infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    z-index: -1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 7rem; }
+    .featured-row { grid-template-columns: 1fr 1fr; }
+    .featured-row > *:last-child { display: none; }
+    .cta-section { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    nav, .section, .cta-section, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .divider { margin: 0 1.5rem; }
+    .featured-row { grid-template-columns: 1fr; }
+  }
+
+  /* Fade in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * { animation: fadeUp 0.6s ease both; }
+  .hero > *:nth-child(2) { animation-delay: 0.1s; }
+</style>
 </head>
 <body>
 
-  <header>
-    <a href="/" class="logo-small">
-      <div class="logo-icon">🎙️</div>
-      <span>חיות כיס</span>
-    </a>
-    <nav>
-      <a href="/admin">ניהול</a>
-    </nav>
-  </header>
+<!-- Stars BG -->
+<div class="stars" id="stars"></div>
 
-  <main class="hero" id="hero">
-    <div class="hero-logo">🎙️</div>
-    <h1>הי, אתם ואתן על חיות כיס, מה תרצו לשמוע היום?</h1>
-    <p>חפשו בין מאות פרקים של הפודקאסט הכלכלי המוביל בישראל</p>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Cos<span>mos</span></a>
+  <ul>
+    <li><a href="#">Discover</a></li>
+    <li><a href="#">Channels</a></li>
+    <li><a href="#">Classes</a></li>
+    <li><a href="#">Podcasts</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="btn btn-ghost">Sign In</a>
+    <a href="#" class="btn btn-primary">Try Free</a>
+  </div>
+</nav>
 
-    <div class="search-wrap">
-      <input
-        class="search-input"
-        type="text"
-        id="searchInput"
-        placeholder="חיפוש..."
-        onkeydown="handleKey(event)"
-      />
-      <button class="search-btn" onclick="doSearch()" title="חפש">🔍</button>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">✦ Ad-free streaming</div>
+    <h1>Think deeper.<br>Watch <em>smarter.</em><br>Grow endlessly.</h1>
+    <p>Premium videos from the world's most thoughtful creators — without algorithms, ads, or distractions. Just you and ideas worth your time.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 0.95rem;">Start for free</a>
+      <a href="#" class="btn btn-ghost" style="padding: 0.85rem 1.5rem; font-size: 0.95rem;">See what's on</a>
+      <span class="hero-note">No credit card required</span>
     </div>
+  </div>
 
-    <button class="random-btn" onclick="randomEpisode()">
-      🎲 לא יודעים מה לשמוע?&nbsp;&nbsp;<strong>הפתע אותי</strong>
-    </button>
-  </main>
+  <!-- HERO PLAYER -->
+  <div class="featured-player">
+    <div class="video-container paused" id="heroPlayer">
+      <!-- Poster -->
+      <div class="video-poster" id="heroPoster">
+        <div style="width:100%; height:100%; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); position: relative; display:flex; align-items:flex-end; padding:1.5rem;">
+          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:5rem; opacity:0.3;">🌌</div>
+          <div style="position:relative; z-index:1;">
+            <div class="card-channel">Kurzgesagt — In a Nutshell</div>
+            <div style="font-family:'DM Serif Display',serif; font-size:1.2rem; line-height:1.3; margin-bottom:0.4rem;">The Universe Is Larger Than You Think</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">42 min • Cosmos Original</div>
+          </div>
+        </div>
+      </div>
 
-  <section class="results-section" id="results">
-    <p class="results-label" id="resultsLabel"></p>
-    <div id="resultsList"></div>
-  </section>
+      <!-- Simulated video (colored canvas) -->
+      <canvas id="demoCanvas" style="width:100%;height:100%;display:block;"></canvas>
 
-  <footer>
-    <p>חיות כיס — מנוע חיפוש חכם לפודקאסט &nbsp;|&nbsp; <a href="/admin">ניהול</a></p>
-  </footer>
+      <!-- Big play button -->
+      <button class="big-play-btn" id="heroPlayBtn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
 
-  <script>
-    const episodes = [
-      { num: 350, title: "ממלכת הקבנוס של צה\"ל", desc: "סיפור מרתק על עסקי הצבא, הקבנוס הממשלתי, ומה שקורה מאחורי הקלעים בכלכלת הביטחון הישראלית.", date: "ינואר 2024", duration: "52 דק'" },
-      { num: 349, title: "הבועה שלא מתפוצצת – שוק הדיור בישראל", desc: "מדוע מחירי הדיור ממשיכים לעלות בעוד כולם מנבאים קריסה? ניתוח מעמיק של שוק הנדל\"ן.", date: "ינואר 2024", duration: "48 דק'" },
-      { num: 348, title: "ריבית, אינפלציה ומה שביניהן", desc: "כשבנק ישראל מעלה ריבית, מה קורה לחשבון הבנק שלנו? על הכלכלה המוניטרית בשפה פשוטה.", date: "דצמבר 2023", duration: "44 דק'" },
-      { num: 347, title: "הסטארטאפ שהיה ולא היה", desc: "סיפורה של חברת סטארטאפ ישראלית שגייסה מיליונים, הגיעה לפסגה — ונפלה.", date: "דצמבר 2023", duration: "55 דק'" },
-      { num: 346, title: "כלכלת המלחמה", desc: "כיצד משפיעה המלחמה על הכלכלה הישראלית? מה קורה לתקציב המדינה, לתיירות ולהשקעות הזרות?", date: "נובמבר 2023", duration: "61 דק'" },
-      { num: 345, title: "הבנקים גוזרים קופון", desc: "הרבעון הרווחי ביותר בהיסטוריה של הבנקים הישראליים – מי משלם את המחיר?", date: "נובמבר 2023", duration: "39 דק'" },
-      { num: 344, title: "ביטקוין ב-2024 – ברבור שחור או זהב דיגיטלי?", desc: "אחרי שנת ירידות, מה מחכה לשוק הקריפטו? ניתוח של הטרנד הגדול הבא.", date: "אוקטובר 2023", duration: "50 דק'" },
-      { num: 343, title: "Amazon מגיעה לישראל", desc: "מה יקרה לשוק הקמעונאי הישראלי כשאמזון תפתח פעולות מלאות? מנצחים ומפסידים.", date: "אוקטובר 2023", duration: "46 דק'" },
-    ];
+      <!-- Controls -->
+      <div class="player-controls">
+        <div class="progress-wrap" id="progressWrap">
+          <div class="progress-bg">
+            <div class="progress-buffered" id="buffered" style="width:65%"></div>
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+        <div class="controls-row">
+          <button class="ctrl-btn" id="playPauseBtn" title="Play/Pause">
+            <svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <button class="ctrl-btn" title="Skip -10s">
+            <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="9" y="14" font-size="5" fill="white" font-family="sans-serif">10</text></svg>
+          </button>
+          <button class="ctrl-btn" title="Skip +10s">
+            <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="9" y="14" font-size="5" fill="white" font-family="sans-serif">10</text></svg>
+          </button>
+          <div class="volume-wrap">
+            <button class="ctrl-btn" id="muteBtn" title="Mute">
+              <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+            </button>
+            <input type="range" class="volume-slider" id="volSlider" min="0" max="1" step="0.05" value="0.8">
+          </div>
+          <span class="time-display" id="timeDisplay">0:00 / 42:17</span>
+          <div class="spacer"></div>
+          <span class="quality-badge">HD</span>
+          <button class="ctrl-btn" title="Settings">
+            <svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
+          </button>
+          <button class="ctrl-btn" title="Fullscreen" id="fsBtn">
+            <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    function handleKey(e) { if (e.key === 'Enter') doSearch(); }
+<div class="divider"></div>
 
-    function doSearch() {
-      const q = document.getElementById('searchInput').value.trim();
-      if (!q) return;
-      const filtered = episodes.filter(ep =>
-        ep.title.includes(q) || ep.desc.includes(q) || String(ep.num).includes(q)
-      );
-      showResults(filtered, `תוצאות עבור: "${q}" — נמצאו ${filtered.length} פרקים`);
+<!-- TRENDING -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Trending Now</h2>
+    <a href="#" class="section-link">View all →</a>
+  </div>
+  <div class="featured-row">
+    <div class="featured-card" onclick="openModal()">
+      <div class="featured-card-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);">🌌</div>
+      <div class="featured-card-overlay">
+        <div class="card-channel">Veritasium</div>
+        <div class="card-title">The Most Dangerous Equation in Mathematics</div>
+      </div>
+    </div>
+    <div class="featured-card" onclick="openModal()">
+      <div class="featured-card-bg" style="background:linear-gradient(135deg,#2d1b69,#11998e,#38ef7d);">🧬</div>
+      <div class="featured-card-overlay">
+        <div class="card-channel">Real Science</div>
+        <div class="card-title">What Consciousness Really Is</div>
+      </div>
+    </div>
+    <div class="featured-card" onclick="openModal()">
+      <div class="featured-card-bg" style="background:linear-gradient(135deg,#ff6b6b,#feca57,#ff9ff3);">🎨</div>
+      <div class="featured-card-overlay">
+        <div class="card-channel">Wendover Productions</div>
+        <div class="card-title">Why Every City Has the Same Layout</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTINUE WATCHING -->
+<section class="section" style="padding-top: 0;">
+  <div class="section-header">
+    <h2 class="section-title">Continue Watching</h2>
+    <a href="#" class="section-link">See all →</a>
+  </div>
+  <div class="video-grid">
+    <a href="#" class="video-card" onclick="event.preventDefault();openModal()">
+      <div class="card-thumb">
+        <div class="card-thumb-bg" style="background:linear-gradient(135deg,#141e30,#243b55);">⚛️</div>
+        <span class="card-duration">18:44</span>
+        <!-- Progress bar on thumb -->
+        <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.2);">
+          <div style="width:35%;height:100%;background:var(--accent);"></div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-channel">PBS Space Time</div>
+        <div class="card-title">Are Black Holes Actually Dark Energy Stars?</div>
+        <div class="card-meta">35% watched</div>
+      </div>
+    </a>
+    <a href="#" class="video-card" onclick="event.preventDefault();openModal()">
+      <div class="card-thumb">
+        <div class="card-thumb-bg" style="background:linear-gradient(135deg,#1d2671,#c33764);">🏛️</div>
+        <span class="card-duration">31:12</span>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.2);">
+          <div style="width:72%;height:100%;background:var(--accent);"></div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-channel">Historia Civilis</div>
+        <div class="card-title">The Fall of Rome, Explained in One Video</div>
+        <div class="card-meta">72% watched</div>
+      </div>
+    </a>
+    <a href="#" class="video-card" onclick="event.preventDefault();openModal()">
+      <div class="card-thumb">
+        <div class="card-thumb-bg" style="background:linear-gradient(135deg,#093028,#237a57);">🦠</div>
+        <span class="card-duration">24:58</span>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.2);">
+          <div style="width:15%;height:100%;background:var(--accent);"></div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-channel">Kurzgesagt</div>
+        <div class="card-title">Evolution — The Greatest Story Ever Told</div>
+        <div class="card-meta">15% watched</div>
+      </div>
+    </a>
+    <a href="#" class="video-card" onclick="event.preventDefault();openModal()">
+      <div class="card-thumb">
+        <div class="card-thumb-bg" style="background:linear-gradient(135deg,#4a1942,#c0392b);">🧠</div>
+        <span class="card-duration">41:03</span>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.2);">
+          <div style="width:58%;height:100%;background:var(--accent);"></div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-channel">CGP Grey</div>
+        <div class="card-title">You Are Two — The Two Minds Inside Your Head</div>
+        <div class="card-meta">58% watched</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHANNELS -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Featured Channels</h2>
+    <a href="#" class="section-link">All channels →</a>
+  </div>
+  <div class="channels-grid">
+    <a href="#" class="channel-card">
+      <div class="channel-avatar" style="background:linear-gradient(135deg,#1a1a2e,#0f3460);">🌌</div>
+      <div class="channel-name">Kurzgesagt</div>
+      <div class="channel-count">312 videos</div>
+    </a>
+    <a href="#" class="channel-card">
+      <div class="channel-avatar" style="background:linear-gradient(135deg,#141e30,#243b55);">⚛️</div>
+      <div class="channel-name">Veritasium</div>
+      <div class="channel-count">198 videos</div>
+    </a>
+    <a href="#" class="channel-card">
+      <div class="channel-avatar" style="background:linear-gradient(135deg,#2d1b69,#11998e);">📐</div>
+      <div class="channel-name">3Blue1Brown</div>
+      <div class="channel-count">156 videos</div>
+    </a>
+    <a href="#" class="channel-card">
+      <div class="channel-avatar" style="background:linear-gradient(135deg,#1d2671,#c33764);">🏛️</div>
+      <div class="channel-name">CGP Grey</div>
+      <div class="channel-count">89 videos</div>
+    </a>
+    <a href="#" class="channel-card">
+      <div class="channel-avatar" style="background:linear-gradient(135deg,#093028,#237a57);">✈️</div>
+      <div class="channel-name">Wendover</div>
+      <div class="channel-count">241 videos</div>
+    </a>
+    <a href="#" class="channel-card">
+      <div class="channel-avatar" style="background:linear-gradient(135deg,#4a1942,#c0392b);">📡</div>
+      <div class="channel-name">PBS Space Time</div>
+      <div class="channel-count">415 videos</div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div>
+    <h2>The best ideas deserve your <em>full attention.</em></h2>
+    <p>Join 1 million+ curious minds who've upgraded their media diet. Support the creators you love while getting exclusive content, early access, and an ad-free experience.</p>
+    <a href="#" class="btn btn-primary" style="padding: 0.9rem 2.2rem; font-size: 0.95rem;">Get Cosmos — It's $5/mo</a>
+  </div>
+  <div class="pricing-cards">
+    <div class="pricing-card">
+      <div class="pricing-name">Monthly</div>
+      <div class="pricing-price">$5<span>/month</span></div>
+      <div class="pricing-desc">Cancel anytime. Full access to all content immediately.</div>
+    </div>
+    <div class="pricing-card featured-pricing">
+      <div class="pricing-name">Annual</div>
+      <div class="pricing-price">$50<span>/year</span></div>
+      <div class="pricing-desc">Save $10 versus monthly. That's two months free.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Cos<span>mos</span></div>
+  <p>© 2026 Cosmos Streaming, Inc. All rights reserved.</p>
+</footer>
+
+<!-- MODAL PLAYER -->
+<div class="player-modal" id="playerModal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="video-container paused" id="modalPlayer">
+      <canvas id="modalCanvas" style="width:100%;height:100%;display:block;"></canvas>
+      <button class="big-play-btn" id="modalPlayBtn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="player-controls">
+        <div class="progress-wrap">
+          <div class="progress-bg">
+            <div class="progress-buffered" style="width:80%"></div>
+            <div class="progress-fill" id="modalProgressFill"></div>
+          </div>
+        </div>
+        <div class="controls-row">
+          <button class="ctrl-btn" id="modalPlayPause">
+            <svg viewBox="0 0 24 24" id="modalPlayIcon"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <span class="time-display" id="modalTime">0:00 / 24:37</span>
+          <div class="spacer"></div>
+          <span class="quality-badge">4K</span>
+          <button class="ctrl-btn">
+            <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Generate stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.setProperty('--d', (Math.random() * 4 + 2) + 's');
+  s.style.animationDelay = (Math.random() * 5) + 's';
+  s.style.opacity = Math.random() * 0.8;
+  starsEl.appendChild(s);
+}
+
+// ————— Animated demo canvas (simulates video) —————
+function makePlayer(canvasId, playBtnId, playIconId, fillId, timeId, playPauseId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let playing = false;
+  let progress = 0;
+  let t = 0;
+  const duration = 2537; // seconds
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Color scheme per canvas
+  const colors = canvasId === 'demoCanvas'
+    ? ['#0f0c29', '#302b63', '#24243e', '#1a1a2e']
+    : ['#093028', '#237a57', '#1a1a2e', '#0d1117'];
+
+  function draw() {
+    if (!canvas.width) return;
+    const w = canvas.width, h = canvas.height;
+    // Animated gradient bg
+    const grd = ctx.createLinearGradient(0, 0, w * Math.sin(t * 0.001 + 1), h);
+    grd.addColorStop(0, colors[0]);
+    grd.addColorStop(0.5, colors[1]);
+    grd.addColorStop(1, colors[2]);
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, w, h);
+
+    // Animated particles
+    for (let i = 0; i < 40; i++) {
+      const x = ((Math.sin(t * 0.0005 * (i + 1) + i * 1.3) * 0.5 + 0.5)) * w;
+      const y = ((Math.cos(t * 0.0003 * (i + 1) + i * 2.1) * 0.5 + 0.5)) * h;
+      const r = 1 + Math.sin(t * 0.002 + i) * 1;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,169,110,${0.2 + Math.sin(t * 0.003 + i) * 0.2})`;
+      ctx.fill();
     }
 
-    function randomEpisode() {
-      const ep = episodes[Math.floor(Math.random() * episodes.length)];
-      showResults([ep], 'פרק אקראי 🎲');
-    }
+    // Center glow
+    const grd2 = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w * 0.4);
+    grd2.addColorStop(0, 'rgba(200,169,110,0.07)');
+    grd2.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd2;
+    ctx.fillRect(0, 0, w, h);
+  }
 
-    function showResults(list, label) {
-      document.getElementById('resultsLabel').textContent = label;
-      const container = document.getElementById('resultsList');
-      container.innerHTML = '';
-      if (list.length === 0) {
-        container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px 0">לא נמצאו תוצאות, נסו מילה אחרת.</p>';
-      } else {
-        list.forEach(ep => {
-          container.innerHTML += `
-            <div class="episode-card">
-              <div class="ep-num">#${ep.num}</div>
-              <div class="ep-info">
-                <h3>${ep.title}</h3>
-                <p>${ep.desc}</p>
-                <div class="ep-meta">
-                  <span>📅 ${ep.date}</span>
-                  <span>⏱️ ${ep.duration}</span>
-                </div>
-              </div>
-            </div>`;
-        });
+  let raf;
+  function loop() {
+    if (playing) { t += 16; progress = Math.min(progress + 16/1000, 1); }
+    draw();
+    if (fillId) {
+      const el = document.getElementById(fillId);
+      if (el) el.style.width = (progress * 100) + '%';
+    }
+    if (timeId) {
+      const el = document.getElementById(timeId);
+      if (el) {
+        const cur = Math.floor(progress * duration);
+        el.textContent = fmt(cur) + ' / ' + fmt(duration);
       }
-      document.getElementById('results').classList.add('visible');
-      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-  </script>
+    raf = requestAnimationFrame(loop);
+  }
+  loop();
+
+  function fmt(s) {
+    const m = Math.floor(s / 60);
+    const ss = (s % 60).toString().padStart(2, '0');
+    return m + ':' + ss;
+  }
+
+  function togglePlay() {
+    playing = !playing;
+    const container = canvas.closest('.video-container');
+    const bigPlay = document.getElementById(playBtnId);
+    const iconEl = document.getElementById(playIconId);
+    if (container) {
+      container.classList.toggle('paused', !playing);
+    }
+    if (bigPlay) bigPlay.style.display = playing ? 'none' : 'flex';
+    if (iconEl) {
+      iconEl.innerHTML = playing
+        ? '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'
+        : '<path d="M8 5v14l11-7z"/>';
+    }
+    // sync the alternate play icon
+    const altIcon = document.getElementById(playIconId === 'playIcon' ? 'playIcon' : playIconId);
+    if (altIcon) altIcon.innerHTML = iconEl ? iconEl.innerHTML : '';
+  }
+
+  // Big play btn
+  const bigBtn = document.getElementById(playBtnId);
+  if (bigBtn) bigBtn.addEventListener('click', togglePlay);
+
+  // Controls play/pause
+  const ppBtn = document.getElementById(playPauseId);
+  if (ppBtn) ppBtn.addEventListener('click', togglePlay);
+
+  return { togglePlay };
+}
+
+const hero = makePlayer('demoCanvas', 'heroPlayBtn', 'playIcon', 'progressFill', 'timeDisplay', 'playPauseBtn');
+const modal = makePlayer('modalCanvas', 'modalPlayBtn', 'modalPlayIcon', 'modalProgressFill', 'modalTime', 'modalPlayPause');
+
+// Volume
+const volSlider = document.getElementById('volSlider');
+const muteBtn = document.getElementById('muteBtn');
+if (volSlider) {
+  volSlider.addEventListener('input', () => {
+    const v = parseFloat(volSlider.value);
+    muteBtn.querySelector('svg').innerHTML = v === 0
+      ? '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>'
+      : '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>';
+  });
+}
+
+// Progress click (hero)
+const pWrap = document.getElementById('progressWrap');
+if (pWrap) {
+  pWrap.addEventListener('click', (e) => {
+    const rect = pWrap.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    // would seek in real video
+  });
+}
+
+// Fullscreen
+const fsBtn = document.getElementById('fsBtn');
+if (fsBtn) {
+  fsBtn.addEventListener('click', () => {
+    const player = document.getElementById('heroPlayer');
+    if (!document.fullscreenElement) {
+      player.requestFullscreen && player.requestFullscreen();
+    } else {
+      document.exitFullscreen && document.exitFullscreen();
+    }
+  });
+}
+
+// Modal
+function openModal() {
+  document.getElementById('playerModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('playerModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('playerModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('playerModal')) closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
 </body>
 </html>
