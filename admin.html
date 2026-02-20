@@ -275,41 +275,41 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
       </div>
 
       <div class="nav-section-label">Overview</div>
-      <div class="nav-item active" onclick="showPanel('dashboard',this)">
+      <div class="nav-item active" data-panel="dashboard" onclick="showPanel('dashboard',this)">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
         Dashboard
       </div>
-      <div class="nav-item" onclick="showPanel('analytics',this)">
+      <div class="nav-item" data-panel="analytics" onclick="showPanel('analytics',this)">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
         Analytics
       </div>
 
       <div class="nav-section-label">Content</div>
-      <div class="nav-item" onclick="showPanel('videos',this)">
+      <div class="nav-item" data-panel="videos" onclick="showPanel('videos',this)">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 8L8 14V8l4 3z"/></svg>
         Videos
       </div>
-      <div class="nav-item" onclick="showPanel('upload',this)">
+      <div class="nav-item" data-panel="upload" onclick="showPanel('upload',this)">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
         Upload
       </div>
-      <div class="nav-item" onclick="showPanel('channels',this)">
+      <div class="nav-item" data-panel="channels" onclick="showPanel('channels',this)">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
         Channels
       </div>
 
       <div class="nav-section-label">Design</div>
-      <div class="nav-item" onclick="showPanel('editor',this)">
+      <div class="nav-item" data-panel="editor" onclick="showPanel('editor',this)">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
         Page Editor
       </div>
-      <div class="nav-item" onclick="showPanel('siteSettings',this)">
+      <div class="nav-item" data-panel="siteSettings" onclick="showPanel('siteSettings',this)">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
         Site Settings
       </div>
 
       <div class="nav-section-label">Users</div>
-      <div class="nav-item" onclick="showPanel('users',this)">
+      <div class="nav-item" data-panel="users" onclick="showPanel('users',this)">
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
         Subscribers
       </div>
@@ -335,7 +335,7 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
           <div class="page-title">Dashboard</div>
           <div class="topbar-actions">
             <button class="btn btn-ghost">Export Report</button>
-            <button class="btn btn-primary" onclick="showPanel('upload',document.querySelector('.nav-item:nth-child(7)'))">+ Upload Video</button>
+            <button class="btn btn-primary" onclick="showPanel('upload', document.querySelector('[data-panel=upload]'))">+ Upload Video</button>
           </div>
         </div>
         <div style="padding:2rem;">
@@ -588,10 +588,10 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
             <div class="card-header"><h3>General</h3></div>
             <div class="card-body">
               <div class="form-grid">
-                <div class="form-group"><label class="form-label">Site Name</label><input type="text" class="form-input" value="Cosmos"></div>
-                <div class="form-group"><label class="form-label">Tagline</label><input type="text" class="form-input" value="Stream Smarter"></div>
-                <div class="form-group full"><label class="form-label">Site Description</label><textarea class="form-input form-textarea" style="min-height:70px;">Premium ad-free streaming from the world's most thoughtful creators.</textarea></div>
-                <div class="form-group"><label class="form-label">Support Email</label><input type="email" class="form-input" value="hello@cosmos.stream"></div>
+                <div class="form-group"><label class="form-label">Site Name</label><input type="text" id="ss-siteName" class="form-input" value="Cosmos"></div>
+                <div class="form-group"><label class="form-label">Tagline</label><input type="text" id="ss-tagline" class="form-input" value="Stream Smarter"></div>
+                <div class="form-group full"><label class="form-label">Site Description</label><textarea id="ss-description" class="form-input form-textarea" style="min-height:70px;">Premium ad-free streaming from the world's most thoughtful creators.</textarea></div>
+                <div class="form-group"><label class="form-label">Support Email</label><input type="email" id="ss-email" class="form-input" value="hello@cosmos.stream"></div>
                 <div class="form-group"><label class="form-label">Default Language</label><select class="form-select"><option>English</option><option>Spanish</option><option>French</option><option>German</option></select></div>
               </div>
             </div>
@@ -627,9 +627,9 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
             <div class="card-header"><h3>Subscription & Pricing</h3></div>
             <div class="card-body">
               <div class="form-grid">
-                <div class="form-group"><label class="form-label">Monthly Price ($)</label><input type="number" class="form-input" value="5.00" step="0.01"></div>
-                <div class="form-group"><label class="form-label">Annual Price ($)</label><input type="number" class="form-input" value="50.00" step="0.01"></div>
-                <div class="form-group"><label class="form-label">Free Trial Days</label><input type="number" class="form-input" value="14"></div>
+                <div class="form-group"><label class="form-label">Monthly Price ($)</label><input type="number" id="ss-monthlyPrice" class="form-input" value="5.00" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Annual Price ($)</label><input type="number" id="ss-annualPrice" class="form-input" value="50.00" step="0.01"></div>
+                <div class="form-group"><label class="form-label">Free Trial Days</label><input type="number" id="ss-trialDays" class="form-input" value="14"></div>
                 <div class="form-group"><label class="form-label">Currency</label><select class="form-select"><option>USD</option><option>EUR</option><option>GBP</option><option>ILS (₪)</option></select></div>
               </div>
             </div>
@@ -639,12 +639,12 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
             <div class="card-header"><h3>Features & Toggles</h3></div>
             <div class="card-body">
               <div style="display:flex;flex-direction:column;gap:1rem;">
-                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Enable Captions by Default</span><label class="toggle"><input type="checkbox" checked><span class="tog-slider"></span></label></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Autoplay Next Video</span><label class="toggle"><input type="checkbox" checked><span class="tog-slider"></span></label></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Picture-in-Picture</span><label class="toggle"><input type="checkbox" checked><span class="tog-slider"></span></label></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Offline Downloads</span><label class="toggle"><input type="checkbox"><span class="tog-slider"></span></label></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Comments / Discussions</span><label class="toggle"><input type="checkbox" checked><span class="tog-slider"></span></label></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Maintenance Mode</span><label class="toggle"><input type="checkbox"><span class="tog-slider"></span></label></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Enable Captions by Default</span><label class="toggle"><input type="checkbox" id="ss-captionsDefault" checked><span class="tog-slider"></span></label></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Autoplay Next Video</span><label class="toggle"><input type="checkbox" id="ss-autoplay" checked><span class="tog-slider"></span></label></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Picture-in-Picture</span><label class="toggle"><input type="checkbox" id="ss-pip" checked><span class="tog-slider"></span></label></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Offline Downloads</span><label class="toggle"><input type="checkbox" id="ss-downloads"><span class="tog-slider"></span></label></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Comments / Discussions</span><label class="toggle"><input type="checkbox" id="ss-comments" checked><span class="tog-slider"></span></label></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;"><span class="form-label" style="margin-bottom:0;">Maintenance Mode</span><label class="toggle"><input type="checkbox" id="ss-maintenance"><span class="tog-slider"></span></label></div>
               </div>
             </div>
           </div>
@@ -655,7 +655,7 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
               <div class="form-grid">
                 <div class="form-group"><label class="form-label">Default Quality</label><select class="form-select"><option>Auto</option><option>1080p</option><option selected>720p</option><option>480p</option></select></div>
                 <div class="form-group"><label class="form-label">Default Speed</label><select class="form-select"><option>0.75×</option><option selected>1×</option><option>1.25×</option><option>1.5×</option></select></div>
-                <div class="form-group"><label class="form-label">Skip Interval (sec)</label><input type="number" class="form-input" value="10"></div>
+                <div class="form-group"><label class="form-label">Skip Interval (sec)</label><input type="number" id="ss-skipInterval" class="form-input" value="10"></div>
                 <div class="form-group"><label class="form-label">Player Theme</label><select class="form-select"><option selected>Cosmos Gold</option><option>Minimal White</option><option>Pure Black</option></select></div>
               </div>
             </div>
@@ -665,9 +665,9 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
             <div class="card-header"><h3>Security</h3></div>
             <div class="card-body">
               <div class="form-grid">
-                <div class="form-group"><label class="form-label">Change Admin Password</label><input type="password" class="form-input" placeholder="New password"></div>
-                <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" class="form-input" placeholder="Confirm new password"></div>
-                <div class="form-group"><label class="form-label">Change Admin Username</label><input type="text" class="form-input" value="admin"></div>
+                <div class="form-group"><label class="form-label">Change Admin Password</label><input type="password" id="ss-newPass" class="form-input" placeholder="New password"></div>
+                <div class="form-group"><label class="form-label">Confirm Password</label><input type="password" id="ss-confPass" class="form-input" placeholder="Confirm new password"></div>
+                <div class="form-group"><label class="form-label">Change Admin Username</label><input type="text" id="ss-adminUser" class="form-input" value="admin"></div>
                 <div class="form-group"><label class="form-label">Two-Factor Auth</label><select class="form-select"><option>Disabled</option><option>SMS</option><option>Authenticator App</option></select></div>
               </div>
             </div>
@@ -691,11 +691,11 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
               <table class="data-table">
                 <thead><tr><th>Email</th><th>Plan</th><th>Joined</th><th>Status</th><th>Actions</th></tr></thead>
                 <tbody>
-                  <tr><td>alice@example.com</td><td>Annual</td><td>Feb 18, 2026</td><td><span class="badge badge-green">Active</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
-                  <tr><td>bob@example.com</td><td>Monthly</td><td>Feb 17, 2026</td><td><span class="badge badge-green">Active</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
-                  <tr><td>carol@example.com</td><td>Annual</td><td>Feb 15, 2026</td><td><span class="badge badge-yellow">Trial</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
-                  <tr><td>dave@example.com</td><td>Monthly</td><td>Feb 12, 2026</td><td><span class="badge badge-red">Cancelled</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
-                  <tr><td>eve@example.com</td><td>Annual</td><td>Feb 10, 2026</td><td><span class="badge badge-green">Active</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+                  <tr><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3455585d575174514c55594458511a575b59">[email&#160;protected]</a></td><td>Annual</td><td>Feb 18, 2026</td><td><span class="badge badge-green">Active</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+                  <tr><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7614191436130e171b061a135815191b">[email&#160;protected]</a></td><td>Monthly</td><td>Feb 17, 2026</td><td><span class="badge badge-green">Active</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+                  <tr><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80e3e1f2efecc0e5f8e1edf0ece5aee3efed">[email&#160;protected]</a></td><td>Annual</td><td>Feb 15, 2026</td><td><span class="badge badge-yellow">Trial</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+                  <tr><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9ada8bfac89acb1a8a4b9a5ace7aaa6a4">[email&#160;protected]</a></td><td>Monthly</td><td>Feb 12, 2026</td><td><span class="badge badge-red">Cancelled</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+                  <tr><td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5237243712372a333f223e377c313d3f">[email&#160;protected]</a></td><td>Annual</td><td>Feb 10, 2026</td><td><span class="badge badge-green">Active</span></td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
                 </tbody>
               </table>
             </div>
@@ -709,13 +709,17 @@ input,select,textarea{font-family:'DM Sans',sans-serif;}
 
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===== AUTH =====
 const ADMIN_USER='admin', ADMIN_PASS='cosmos2026';
 function doLogin(){
-  const u=document.getElementById('loginUser').value;
+  const u=document.getElementById('loginUser').value.trim();
   const p=document.getElementById('loginPass').value;
-  if(u===ADMIN_USER&&p===ADMIN_PASS){
+  // Check saved credentials first, then defaults
+  const saved = (() => { try { return JSON.parse(localStorage.getItem('cosmos_site_settings')||'{}'); } catch(e){ return {}; } })();
+  const expectedUser = saved.adminUser || ADMIN_USER;
+  const expectedPass = saved.adminPass || ADMIN_PASS;
+  if(u===expectedUser && p===expectedPass){
     document.getElementById('loginScreen').style.opacity='0';
     document.getElementById('loginScreen').style.pointerEvents='none';
     setTimeout(()=>document.getElementById('loginScreen').style.display='none',400);
@@ -736,10 +740,12 @@ function showPanel(name, navEl){
   document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  if(navEl)navEl.classList.add('active');
-  else{
-    const items=document.querySelectorAll('.nav-item');
-    items.forEach(item=>{if(item.getAttribute('onclick')&&item.getAttribute('onclick').includes("'"+name+"'"))item.classList.add('active');});
+  if(navEl) {
+    navEl.classList.add('active');
+  } else {
+    // Find nav item by data-panel attribute
+    const match = document.querySelector(`.nav-item[data-panel="${name}"]`);
+    if(match) match.classList.add('active');
   }
 }
 
@@ -753,11 +759,91 @@ const videos=[
   {id:'pbs-1',title:'Are Black Holes Dark Energy Stars?',channel:'PBS Space Time',category:'Science',status:'review',views:'—',duration:'34:18',emoji:'⚫',bg:'linear-gradient(135deg,#141e30,#243b55)'},
 ];
 
+// ===== PERSISTENCE (localStorage) =====
+const STORAGE_KEYS = {
+  videos: 'cosmos_videos',
+  siteSettings: 'cosmos_site_settings',
+  canvas: 'cosmos_canvas_blocks',
+  canvasPage: 'cosmos_canvas_page',
+};
+
+function saveToStorage(key, data) {
+  try { localStorage.setItem(key, JSON.stringify(data)); return true; }
+  catch(e) { return false; }
+}
+
+function loadFromStorage(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch(e) { return fallback; }
+}
+
+// Default site settings
+const defaultSiteSettings = {
+  siteName: 'Cosmos', tagline: 'Stream Smarter',
+  description: 'Premium ad-free streaming from the world\'s most thoughtful creators.',
+  email: 'hello@cosmos.stream', language: 'English',
+  accentColor: '#c8a96e', theme: 'Dark (Cosmic)',
+  monthlyPrice: '5.00', annualPrice: '50.00', trialDays: '14', currency: 'USD',
+  captionsDefault: true, autoplay: true, pip: true, downloads: false,
+  comments: true, maintenance: false,
+  defaultQuality: '720p', defaultSpeed: '1×', skipInterval: '10', playerTheme: 'Cosmos Gold',
+  adminUser: 'admin',
+};
+
 function initAdmin(){
+  // Load persisted videos (merge with defaults)
+  const savedVideos = loadFromStorage(STORAGE_KEYS.videos, null);
+  if(savedVideos) {
+    videos.length = 0;
+    savedVideos.forEach(v => videos.push(v));
+  }
   renderVideoTable();
   renderDashTable();
   renderActivity();
   renderChart();
+  loadSiteSettingsUI();
+  // Load canvas
+  const savedBlocks = loadFromStorage(STORAGE_KEYS.canvas, []);
+  const savedPage = loadFromStorage(STORAGE_KEYS.canvasPage, 'home');
+  canvasBlocks = savedBlocks;
+  const pageSelect = document.getElementById('pageSelect');
+  if(pageSelect) pageSelect.value = savedPage;
+  renderCanvas();
+}
+
+function loadSiteSettingsUI() {
+  const s = loadFromStorage(STORAGE_KEYS.siteSettings, defaultSiteSettings);
+  // Map settings to form fields by ID
+  const fieldMap = {
+    'ss-siteName': s.siteName, 'ss-tagline': s.tagline,
+    'ss-description': s.description, 'ss-email': s.email,
+    'ss-monthlyPrice': s.monthlyPrice, 'ss-annualPrice': s.annualPrice,
+    'ss-trialDays': s.trialDays,
+    'ss-skipInterval': s.skipInterval,
+    'ss-adminUser': s.adminUser,
+  };
+  Object.entries(fieldMap).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if(el) el.value = val;
+  });
+  // Toggles
+  const toggleMap = {
+    'ss-captionsDefault': s.captionsDefault, 'ss-autoplay': s.autoplay,
+    'ss-pip': s.pip, 'ss-downloads': s.downloads,
+    'ss-comments': s.comments, 'ss-maintenance': s.maintenance,
+  };
+  Object.entries(toggleMap).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if(el) el.checked = val;
+  });
+  // Accent color
+  document.querySelectorAll('.color-swatch').forEach(s2 => s2.classList.remove('selected'));
+  const matchSwatch = [...document.querySelectorAll('.color-swatch')].find(sw =>
+    sw.style.background === s.accentColor || sw.dataset.color === s.accentColor
+  );
+  if(matchSwatch) matchSwatch.classList.add('selected');
 }
 
 function statusBadge(s){
@@ -818,7 +904,12 @@ function renderChart(){
 function deleteVideo(id,btn){
   const row=btn.closest('tr');
   row.style.opacity='0';row.style.transform='translateX(20px)';row.style.transition='all .3s';
-  setTimeout(()=>row.remove(),300);
+  setTimeout(()=>{
+    row.remove();
+    const idx = videos.findIndex(v=>v.id===id);
+    if(idx!==-1) videos.splice(idx,1);
+    saveToStorage(STORAGE_KEYS.videos, videos);
+  },300);
   showToast('Video deleted','success');
 }
 
@@ -857,13 +948,58 @@ function simulateUpload(){
   },200);
 }
 
-// ===== SITE SETTINGS =====
-function selectColor(el,color){
+function selectColor(el, color){
   document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'));
   el.classList.add('selected');
-  showToast('Accent color updated','success');
+  el.dataset.color = color;
+  showToast('Accent color updated — save to apply');
 }
-function saveSettings(){showToast('✅ Settings saved!','success');}
+
+function saveSettings(){
+  const s = loadFromStorage(STORAGE_KEYS.siteSettings, {...defaultSiteSettings});
+  // Read form fields
+  const fieldMap = {
+    'ss-siteName': 'siteName', 'ss-tagline': 'tagline',
+    'ss-description': 'description', 'ss-email': 'email',
+    'ss-monthlyPrice': 'monthlyPrice', 'ss-annualPrice': 'annualPrice',
+    'ss-trialDays': 'trialDays', 'ss-skipInterval': 'skipInterval',
+    'ss-adminUser': 'adminUser',
+  };
+  Object.entries(fieldMap).forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if(el) s[key] = el.value;
+  });
+  const toggleMap = {
+    'ss-captionsDefault': 'captionsDefault', 'ss-autoplay': 'autoplay',
+    'ss-pip': 'pip', 'ss-downloads': 'downloads',
+    'ss-comments': 'comments', 'ss-maintenance': 'maintenance',
+  };
+  Object.entries(toggleMap).forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if(el) s[key] = el.checked;
+  });
+  // Accent color from selected swatch
+  const sel = document.querySelector('.color-swatch.selected');
+  if(sel) s.accentColor = sel.dataset.color || sel.style.background;
+  // Password change
+  const newPass = document.getElementById('ss-newPass');
+  const confPass = document.getElementById('ss-confPass');
+  if(newPass && newPass.value) {
+    if(newPass.value !== (confPass ? confPass.value : '')) {
+      showToast('❌ Passwords do not match', 'error'); return;
+    }
+    if(newPass.value.length < 6) {
+      showToast('❌ Password must be at least 6 characters', 'error'); return;
+    }
+    s.adminPass = newPass.value;
+    // Update runtime password
+    window._adminPass = newPass.value;
+    if(newPass) newPass.value = '';
+    if(confPass) confPass.value = '';
+  }
+  saveToStorage(STORAGE_KEYS.siteSettings, s);
+  showToast('✅ Settings saved!', 'success');
+}
 
 // ===== PAGE EDITOR =====
 let canvasBlocks=[];
@@ -952,63 +1088,84 @@ function renderProps(){
   const panel=document.getElementById('propsPanel');
   const block=canvasBlocks.find(b=>b.id===selectedBlock);
   if(!block){panel.innerHTML='<div class="no-selection"><span>👆</span><p>Select a block to edit</p></div>';return;}
-  panel.innerHTML=`
+  const p = block.props || {};
+  let propsHTML = `
     <div class="prop-group">
       <div class="prop-label">Block Type</div>
       <div style="font-size:.82rem;font-weight:600;color:var(--accent);">${block.label}</div>
-    </div>
-    ${block.type==='hero'?`
+    </div>`;
+
+  if(block.type==='hero') {
+    propsHTML += `
     <div class="prop-group">
       <div class="prop-label">Headline</div>
-      <input class="prop-input" value="✨ Welcome to Cosmos" oninput="updateBlockProp('headline',this.value)">
+      <input class="prop-input" value="${p.headline||'✨ Welcome to Cosmos'}" oninput="updateBlockProp('headline',this.value)">
     </div>
     <div class="prop-group">
       <div class="prop-label">Subtext</div>
-      <input class="prop-input" value="Premium ad-free streaming.">
+      <input class="prop-input" value="${p.subtext||'Premium ad-free streaming.'}" oninput="updateBlockProp('subtext',this.value)">
     </div>
     <div class="prop-group">
       <div class="prop-label">Button Text</div>
-      <input class="prop-input" value="Start Watching →">
+      <input class="prop-input" value="${p.btnText||'Start Watching →'}" oninput="updateBlockProp('btnText',this.value)">
     </div>
     <div class="prop-group">
-      <div class="prop-label">Background</div>
+      <div class="prop-label">Background Gradient</div>
       <div class="color-row">
-        <div class="color-swatch" style="background:linear-gradient(135deg,#0f0c29,#302b63);width:24px;height:24px;" onclick="showToast('Gradient applied')"></div>
-        <div class="color-swatch" style="background:linear-gradient(135deg,#141e30,#243b55);width:24px;height:24px;" onclick="showToast('Gradient applied')"></div>
-        <div class="color-swatch" style="background:linear-gradient(135deg,#1d2671,#c33764);width:24px;height:24px;" onclick="showToast('Gradient applied')"></div>
+        <div class="color-swatch" style="background:linear-gradient(135deg,#0f0c29,#302b63);width:26px;height:26px;" onclick="updateBlockProp('bgGrad','linear-gradient(135deg,#0f0c29,#302b63)')"></div>
+        <div class="color-swatch" style="background:linear-gradient(135deg,#141e30,#243b55);width:26px;height:26px;" onclick="updateBlockProp('bgGrad','linear-gradient(135deg,#141e30,#243b55)')"></div>
+        <div class="color-swatch" style="background:linear-gradient(135deg,#1d2671,#c33764);width:26px;height:26px;" onclick="updateBlockProp('bgGrad','linear-gradient(135deg,#1d2671,#c33764)')"></div>
+        <div class="color-swatch" style="background:linear-gradient(135deg,#093028,#237a57);width:26px;height:26px;" onclick="updateBlockProp('bgGrad','linear-gradient(135deg,#093028,#237a57)')"></div>
       </div>
-    </div>`:block.type==='text'?`
+    </div>`;
+  } else if(block.type==='text') {
+    propsHTML += `
     <div class="prop-group">
       <div class="prop-label">Heading</div>
-      <input class="prop-input" value="About Cosmos">
+      <input class="prop-input" value="${p.heading||'About Cosmos'}" oninput="updateBlockProp('heading',this.value)">
     </div>
     <div class="prop-group">
       <div class="prop-label">Body Text</div>
-      <textarea class="prop-input" style="min-height:80px;resize:vertical;">We believe great ideas deserve your full attention.</textarea>
-    </div>`:block.type==='cta'?`
+      <textarea class="prop-input" style="min-height:80px;resize:vertical;" oninput="updateBlockProp('body',this.value)">${p.body||'We believe great ideas deserve your full attention.'}</textarea>
+    </div>`;
+  } else if(block.type==='cta') {
+    propsHTML += `
     <div class="prop-group">
-      <div class="prop-label">CTA Heading</div>
-      <input class="prop-input" value="Join Cosmos Today">
+      <div class="prop-label">Heading</div>
+      <input class="prop-input" value="${p.heading||'Join Cosmos Today'}" oninput="updateBlockProp('heading',this.value)">
+    </div>
+    <div class="prop-group">
+      <div class="prop-label">Subtext</div>
+      <input class="prop-input" value="${p.subtext||'Ad-free streaming from the creators you love.'}" oninput="updateBlockProp('subtext',this.value)">
     </div>
     <div class="prop-group">
       <div class="prop-label">Button Text</div>
-      <input class="prop-input" value="Get Started — $5/mo">
+      <input class="prop-input" value="${p.btnText||'Get Started — \$5/mo'}" oninput="updateBlockProp('btnText',this.value)">
     </div>
     <div class="prop-group">
       <div class="prop-label">Background Color</div>
-      <input type="color" class="prop-input" value="#c8a96e" style="height:36px;padding:.2rem;">
-    </div>`:block.type==='testimonial'?`
+      <input type="color" class="prop-input" value="${p.bg||'#c8a96e'}" style="height:36px;padding:.2rem;" oninput="updateBlockProp('bg',this.value)">
+    </div>`;
+  } else if(block.type==='testimonial') {
+    propsHTML += `
     <div class="prop-group">
       <div class="prop-label">Quote</div>
-      <textarea class="prop-input" style="min-height:80px;resize:vertical;">"Cosmos has completely changed how I learn."</textarea>
+      <textarea class="prop-input" style="min-height:80px;resize:vertical;" oninput="updateBlockProp('quote',this.value)">${p.quote||'"Cosmos has completely changed how I learn."'}</textarea>
     </div>
     <div class="prop-group">
       <div class="prop-label">Attribution</div>
-      <input class="prop-input" value="Alex M., Annual Subscriber">
-    </div>`:`<div style="font-size:.8rem;color:var(--text-muted);padding:.5rem 0;">No editable properties for this block type.</div>`}
-    <div style="margin-top:1rem;display:flex;gap:.4rem;flex-wrap:wrap;">
+      <input class="prop-input" value="${p.cite||'Alex M., Annual Subscriber'}" oninput="updateBlockProp('cite',this.value)">
+    </div>`;
+  } else {
+    propsHTML += `<div style="font-size:.8rem;color:var(--text-muted);padding:.5rem 0;">No editable properties for this block type.</div>`;
+  }
+
+  propsHTML += `
+    <div style="margin-top:1.25rem;display:flex;gap:.4rem;flex-wrap:wrap;">
       <button class="btn btn-red btn-sm" onclick="deleteSelected()" style="width:100%;justify-content:center;">🗑 Remove Block</button>
     </div>`;
+
+  panel.innerHTML = propsHTML;
 }
 
 function saveHistory(){history.push(JSON.parse(JSON.stringify(canvasBlocks)));}
@@ -1026,7 +1183,7 @@ function duplicateSelected(){
   const block=canvasBlocks.find(b=>b.id===selectedBlock);
   if(!block)return;
   saveHistory();
-  const copy={...block,id:'block_'+(Date.now())};
+  const copy={...block,id:'block_'+(Date.now()),props:{...block.props}};
   const idx=canvasBlocks.findIndex(b=>b.id===selectedBlock);
   canvasBlocks.splice(idx+1,0,copy);
   renderCanvas();
@@ -1046,19 +1203,63 @@ function clearCanvas(){
   saveHistory();canvasBlocks=[];selectedBlock=null;renderCanvas();
   document.getElementById('propsPanel').innerHTML='<div class="no-selection"><span>👆</span><p>Select a block to edit</p></div>';
 }
-function saveCanvas(){showToast('💾 Page saved!','success');}
-function previewCanvas(){
-  const html=document.getElementById('editorCanvas').innerHTML;
-  const w=window.open('','_blank');
-  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:'DM Sans',sans-serif;}.cb-hero{background:linear-gradient(135deg,#0f0c29,#302b63);padding:4rem 3rem;text-align:center;color:#fff;}.cb-hero h1{font-family:'DM Serif Display',serif;font-size:2.5rem;margin-bottom:1rem;}.cb-hero p{opacity:.7;margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto;}.cb-hero-btn{display:inline-block;padding:.7rem 1.8rem;background:#c8a96e;color:#0a0a0f;border-radius:5px;font-weight:700;font-size:.9rem;}.cb-text{padding:2rem 3rem;background:#fff;}.cb-text h2{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#0a0a0f;margin-bottom:.75rem;}.cb-text p{color:#555;line-height:1.7;}.cb-video-grid{padding:2rem 3rem;background:#0a0a0f;}.cb-video-grid h2{font-family:'DM Serif Display',serif;font-size:1.5rem;color:#fff;margin-bottom:1.25rem;}.cb-vg-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;}.cb-vg-card{background:#13131c;border-radius:6px;overflow:hidden;}.cb-vg-card-thumb{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:2rem;}.cb-vg-card-info{padding:.6rem;}.cb-vg-card-title{font-size:.75rem;color:#f0ede8;font-weight:500;}.cb-cta{background:#c8a96e;padding:3rem;text-align:center;}.cb-cta h2{font-family:'DM Serif Display',serif;font-size:2rem;color:#0a0a0f;margin-bottom:.75rem;}.cb-cta p{color:rgba(10,10,15,.7);margin-bottom:1.5rem;}.cb-cta-btn{display:inline-block;padding:.7rem 2rem;background:#0a0a0f;color:#fff;border-radius:5px;font-weight:700;}.cb-image{width:100%;aspect-ratio:21/7;background:linear-gradient(135deg,#1a1a2e,#2d2d5a);display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,.3);}.cb-footer{background:#07070e;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;color:#888;}.cb-footer .fl{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#c8a96e;}.cb-footer .fl span{color:#fff;}.cb-testimonial{background:#f8f6f2;padding:2.5rem 3rem;text-align:center;}.cb-testimonial blockquote{font-family:'DM Serif Display',serif;font-size:1.5rem;color:#0a0a0f;margin-bottom:1rem;font-style:italic;}.cb-testimonial cite{font-size:.82rem;color:#888;}.cb-channels{background:#0a0a0f;padding:2rem 3rem;}.cb-channels h2{font-family:'DM Serif Display',serif;font-size:1.4rem;color:#f0ede8;margin-bottom:1.25rem;}.cb-ch-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;}.cb-ch-card{background:#13131c;border-radius:8px;padding:.9rem;text-align:center;}.cb-ch-av{width:40px;height:40px;border-radius:50%;margin:0 auto .5rem;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}.cb-ch-name{font-size:.68rem;font-weight:600;color:#f0ede8;}.canvas-block{position:relative;}.block-actions{display:none;}</style></head><body>${html}</body></html>`);
-  w.document.close();
+
+// Update a prop on the selected block WITHOUT re-rendering the whole canvas
+function updateBlockProp(key, value) {
+  const block = canvasBlocks.find(b=>b.id===selectedBlock);
+  if(!block) return;
+  if(!block.props) block.props = {};
+  block.props[key] = value;
+  // Live-update only the specific element inside the canvas block, not a full re-render
+  const blockEl = document.getElementById(selectedBlock);
+  if(!blockEl) return;
+  // Update text nodes inside the block based on known selectors per type
+  if(block.type==='hero') {
+    if(key==='headline'){ const el=blockEl.querySelector('.cb-hero h1'); if(el) el.textContent=value; }
+    if(key==='subtext'){ const el=blockEl.querySelector('.cb-hero p'); if(el) el.textContent=value; }
+    if(key==='btnText'){ const el=blockEl.querySelector('.cb-hero-btn'); if(el) el.textContent=value; }
+    if(key==='bgGrad'){ const el=blockEl.querySelector('.cb-hero'); if(el) el.style.background=value; }
+  } else if(block.type==='text') {
+    if(key==='heading'){ const el=blockEl.querySelector('.cb-text h2'); if(el) el.textContent=value; }
+    if(key==='body'){ const el=blockEl.querySelector('.cb-text p'); if(el) el.textContent=value; }
+  } else if(block.type==='cta') {
+    if(key==='heading'){ const el=blockEl.querySelector('.cb-cta h2'); if(el) el.textContent=value; }
+    if(key==='subtext'){ const el=blockEl.querySelector('.cb-cta p'); if(el) el.textContent=value; }
+    if(key==='btnText'){ const el=blockEl.querySelector('.cb-cta-btn'); if(el) el.textContent=value; }
+    if(key==='bg'){ const el=blockEl.querySelector('.cb-cta'); if(el) el.style.background=value; }
+  } else if(block.type==='testimonial') {
+    if(key==='quote'){ const el=blockEl.querySelector('.cb-testimonial blockquote'); if(el) el.textContent=value; }
+    if(key==='cite'){ const el=blockEl.querySelector('.cb-testimonial cite'); if(el) el.textContent='— '+value; }
+  }
 }
 
-// ===== TOAST =====
-function showToast(msg,type=''){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.className='toast show'+(type?' '+type:'');
-  clearTimeout(t._t);t._t=setTimeout(()=>t.className='toast',2500);
+function saveCanvas(){
+  saveToStorage(STORAGE_KEYS.canvas, canvasBlocks);
+  const pageSelect = document.getElementById('pageSelect');
+  saveToStorage(STORAGE_KEYS.canvasPage, pageSelect ? pageSelect.value : 'home');
+  showToast('💾 Page saved!','success');
+}
+
+function previewCanvas(){
+  const previewCSS = `*{margin:0;padding:0;box-sizing:border-box;}body{font-family:'DM Sans',sans-serif;}.cb-hero{background:linear-gradient(135deg,#0f0c29,#302b63);padding:4rem 3rem;text-align:center;color:#fff;}.cb-hero h1{font-family:'DM Serif Display',serif;font-size:2.5rem;margin-bottom:1rem;}.cb-hero p{opacity:.7;margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto;}.cb-hero-btn{display:inline-block;padding:.7rem 1.8rem;background:#c8a96e;color:#0a0a0f;border-radius:5px;font-weight:700;font-size:.9rem;}.cb-text{padding:2rem 3rem;background:#fff;}.cb-text h2{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#0a0a0f;margin-bottom:.75rem;}.cb-text p{color:#555;line-height:1.7;}.cb-video-grid{padding:2rem 3rem;background:#0a0a0f;}.cb-video-grid h2{font-family:'DM Serif Display',serif;font-size:1.5rem;color:#fff;margin-bottom:1.25rem;}.cb-vg-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;}.cb-vg-card{background:#13131c;border-radius:6px;overflow:hidden;}.cb-vg-card-thumb{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:2rem;}.cb-vg-card-info{padding:.6rem;}.cb-vg-card-title{font-size:.75rem;color:#f0ede8;font-weight:500;}.cb-cta{padding:3rem;text-align:center;}.cb-cta h2{font-family:'DM Serif Display',serif;font-size:2rem;margin-bottom:.75rem;}.cb-cta-btn{display:inline-block;padding:.7rem 2rem;background:#0a0a0f;color:#fff;border-radius:5px;font-weight:700;}.cb-image{width:100%;aspect-ratio:21/7;background:linear-gradient(135deg,#1a1a2e,#2d2d5a);display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,.3);}.cb-footer{background:#07070e;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;color:#888;}.cb-footer .fl{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#c8a96e;}.cb-footer .fl span{color:#fff;}.cb-testimonial{background:#f8f6f2;padding:2.5rem 3rem;text-align:center;}.cb-testimonial blockquote{font-family:'DM Serif Display',serif;font-size:1.5rem;color:#0a0a0f;margin-bottom:1rem;font-style:italic;}.cb-testimonial cite{font-size:.82rem;color:#888;}.cb-channels{background:#0a0a0f;padding:2rem 3rem;}.cb-channels h2{font-family:'DM Serif Display',serif;font-size:1.4rem;color:#f0ede8;margin-bottom:1.25rem;}.cb-ch-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem;}.cb-ch-card{background:#13131c;border-radius:8px;padding:.9rem;text-align:center;}.cb-ch-av{width:40px;height:40px;border-radius:50%;margin:0 auto .5rem;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}.cb-ch-name{font-size:.68rem;font-weight:600;color:#f0ede8;}`;
+  // Render clean blocks from current canvas DOM (no editor chrome)
+  let cleanHTML = '';
+  canvasBlocks.forEach(b => {
+    const el = document.getElementById(b.id);
+    if(el) {
+      // Clone and strip editor UI
+      const clone = el.cloneNode(true);
+      const actions = clone.querySelector('.block-actions');
+      if(actions) actions.remove();
+      clone.removeAttribute('onclick');
+      clone.classList.remove('canvas-block','selected');
+      clone.style.outline = '';
+      cleanHTML += clone.innerHTML;
+    }
+  });
+  const w = window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap" rel="stylesheet"><style>${previewCSS}</style></head><body>${cleanHTML||'<div style="padding:4rem;text-align:center;color:#666;font-family:sans-serif;">Empty page — add blocks in the editor first</div>'}</body></html>`);
+  w.document.close();
 }
 </script>
 </body>
