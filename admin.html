@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>חיות כיס | ניהול</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --accent: #6c63ff;
+      --accent2: #a78bfa;
+      --danger: #f87171;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --text: #f0f0f5;
+      --text-muted: #8b8fa8;
+      --border: #2e3350;
+      --radius: 14px;
+    }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: fixed;
+      right: 0; top: 0; bottom: 0;
+      width: 240px;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 0;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 24px 28px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .logo-icon { font-size: 1.6rem; }
+
+    .nav-section {
+      padding: 0 12px;
+    }
+    .nav-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0 12px;
+      margin: 16px 0 6px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: rgba(108,99,255,0.15);
+      color: var(--accent2);
+    }
+    .nav-item.active { font-weight: 600; }
+    .nav-icon { font-size: 1.1rem; width: 20px; text-align: center; }
+
+    /* ── MAIN ── */
+    .main {
+      margin-right: 240px;
+      padding: 32px 40px;
+      min-height: 100vh;
+    }
+
+    .page-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .page-sub {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 32px;
+    }
+
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 4px; height: 100%;
+      background: var(--accent);
+    }
+    .stat-card.green::before { background: var(--success); }
+    .stat-card.yellow::before { background: var(--warning); }
+    .stat-card.red::before { background: var(--danger); }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    .stat-delta {
+      font-size: 0.8rem;
+      color: var(--success);
+      margin-top: 6px;
+    }
+    .stat-delta.neg { color: var(--danger); }
+
+    /* ── PANEL ── */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .panel-body { padding: 24px; }
+
+    /* ── TABLE ── */
+    .ep-table { width: 100%; border-collapse: collapse; }
+    .ep-table th {
+      text-align: right;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      padding: 0 0 14px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.03em;
+    }
+    .ep-table td {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(46,51,80,0.5);
+      font-size: 0.9rem;
+    }
+    .ep-table tr:last-child td { border-bottom: none; }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+    .badge.green { background: rgba(52,211,153,0.15); color: var(--success); }
+    .badge.blue  { background: rgba(108,99,255,0.15); color: var(--accent2); }
+
+    /* ── FORM AREA ── */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.84rem; color: var(--text-muted); }
+    .form-group input, .form-group textarea, .form-group select {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: var(--text);
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      direction: rtl;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--accent);
+    }
+    .form-group textarea { min-height: 90px; resize: vertical; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      padding: 10px 22px;
+      border-radius: 10px;
+      border: none;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: var(--accent2); }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
+    .btn-danger { background: rgba(248,113,113,0.15); color: var(--danger); border: 1px solid transparent; }
+    .btn-danger:hover { background: rgba(248,113,113,0.25); }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    /* ── LOADING overlay ── */
+    #loader {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 999;
+      flex-direction: column;
+      gap: 16px;
+      transition: opacity 0.5s;
+    }
+    .spinner {
+      width: 46px; height: 46px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loader p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* responsive */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-right: 0; padding: 20px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading screen (mimics hayotkiss.com/admin "טוען...") -->
+  <div id="loader">
+    <div class="logo-icon" style="font-size:2.5rem">🎙️</div>
+    <div class="spinner"></div>
+    <p>טוען...</p>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">🎙️</span>
+      <span>חיות כיס</span>
+    </div>
+    <nav class="nav-section">
+      <div class="nav-label">ראשי</div>
+      <div class="nav-item active" onclick="showTab('dashboard',this)">
+        <span class="nav-icon">📊</span> לוח בקרה
+      </div>
+      <div class="nav-item" onclick="showTab('episodes',this)">
+        <span class="nav-icon">🎧</span> פרקים
+      </div>
+      <div class="nav-item" onclick="showTab('add',this)">
+        <span class="nav-icon">➕</span> הוסף פרק
+      </div>
+      <div class="nav-label">הגדרות</div>
+      <div class="nav-item" onclick="showTab('settings',this)">
+        <span class="nav-icon">⚙️</span> הגדרות
+      </div>
+      <div class="nav-item" onclick="window.location.href='/'">
+        <span class="nav-icon">🌐</span> לאתר הראשי
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- DASHBOARD TAB -->
+    <div id="tab-dashboard">
+      <div class="page-title">לוח בקרה</div>
+      <div class="page-sub">ברוכים הבאים למערכת הניהול של חיות כיס</div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">סה"כ פרקים</div>
+          <div class="stat-value">352</div>
+          <div class="stat-delta">↑ +3 החודש</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">חיפושים השבוע</div>
+          <div class="stat-value">4,821</div>
+          <div class="stat-delta">↑ +12% לעומת שבוע שעבר</div>
+        </div>
+        <div class="stat-card yellow">
+          <div class="stat-label">ממוצע זמן שהייה</div>
+          <div class="stat-value">2:34</div>
+          <div class="stat-delta">↑ +8 שניות</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-label">שגיאות אינדוקס</div>
+          <div class="stat-value">2</div>
+          <div class="stat-delta neg">↓ צריך טיפול</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <span>🔍 חיפושים אחרונים</span>
+          <span style="color:var(--text-muted);font-size:0.82rem;font-weight:400">עודכן זה עתה</span>
+        </div>
+        <div class="panel-body">
+          <table class="ep-table">
+            <thead><tr>
+              <th>מונח</th><th>תוצאות</th><th>זמן</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>ריבית</td><td>14</td><td>לפני 2 דקות</td></tr>
+              <tr><td>נדל"ן</td><td>22</td><td>לפני 5 דקות</td></tr>
+              <tr><td>ביטקוין</td><td>8</td><td>לפני 9 דקות</td></tr>
+              <tr><td>שוק העבודה</td><td>11</td><td>לפני 14 דקות</td></tr>
+              <tr><td>אינפלציה</td><td>17</td><td>לפני 21 דקות</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- EPISODES TAB -->
+    <div id="tab-episodes" style="display:none">
+      <div class="page-title">ניהול פרקים</div>
+      <div class="page-sub">כל פרקי הפודקאסט — 352 פרקים בסך הכל</div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <span>פרקים אחרונים</span>
+          <button class="btn btn-primary" onclick="showTab('add', document.querySelector('.nav-item:nth-child(3))'))">+ הוסף פרק</button>
+        </div>
+        <div class="panel-body">
+          <table class="ep-table">
+            <thead><tr>
+              <th>מספר</th><th>כותרת</th><th>תאריך</th><th>סטטוס</th><th>פעולות</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td>#352</td><td>כלכלת המלחמה – עדכון 2024</td><td>פבר' 2024</td>
+                <td><span class="badge green">פורסם</span></td>
+                <td><button class="btn btn-ghost" style="padding:6px 12px;font-size:0.8rem">עריכה</button></td>
+              </tr>
+              <tr>
+                <td>#351</td><td>שוק ההון בצל המלחמה</td><td>ינו' 2024</td>
+                <td><span class="badge green">פורסם</span></td>
+                <td><button class="btn btn-ghost" style="padding:6px 12px;font-size:0.8rem">עריכה</button></td>
+              </tr>
+              <tr>
+                <td>#350</td><td>ממלכת הקבנוס של צה"ל</td><td>ינו' 2024</td>
+                <td><span class="badge green">פורסם</span></td>
+                <td><button class="btn btn-ghost" style="padding:6px 12px;font-size:0.8rem">עריכה</button></td>
+              </tr>
+              <tr>
+                <td>#349</td><td>הבועה שלא מתפוצצת</td><td>דצמ' 2023</td>
+                <td><span class="badge green">פורסם</span></td>
+                <td><button class="btn btn-ghost" style="padding:6px 12px;font-size:0.8rem">עריכה</button></td>
+              </tr>
+              <tr>
+                <td>#353</td><td>טיוטה – לא לפרסום</td><td>—</td>
+                <td><span class="badge blue">טיוטה</span></td>
+                <td><button class="btn btn-ghost" style="padding:6px 12px;font-size:0.8rem">עריכה</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD EPISODE TAB -->
+    <div id="tab-add" style="display:none">
+      <div class="page-title">הוספת פרק חדש</div>
+      <div class="page-sub">הוסיפו פרק חדש למאגר החיפוש</div>
+
+      <div class="panel">
+        <div class="panel-header">פרטי הפרק</div>
+        <div class="panel-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>מספר פרק</label>
+              <input type="number" placeholder="353" />
+            </div>
+            <div class="form-group">
+              <label>תאריך פרסום</label>
+              <input type="date" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="grid-column:1/-1">
+              <label>כותרת הפרק</label>
+              <input type="text" placeholder="כותרת הפרק..." />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="grid-column:1/-1">
+              <label>תיאור קצר</label>
+              <textarea placeholder="תיאור קצר של הפרק שיופיע בתוצאות החיפוש..."></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>משך (דקות)</label>
+              <input type="number" placeholder="45" />
+            </div>
+            <div class="form-group">
+              <label>קישור לפרק (Spotify / RSS)</label>
+              <input type="url" placeholder="https://..." />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>סטטוס</label>
+              <select>
+                <option>פורסם</option>
+                <option>טיוטה</option>
+                <option>מוסתר</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="alert('הפרק נשמר בהצלחה ✓')">💾 שמור פרק</button>
+            <button class="btn btn-ghost">ביטול</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div id="tab-settings" style="display:none">
+      <div class="page-title">הגדרות</div>
+      <div class="page-sub">הגדרות המערכת והאתר</div>
+
+      <div class="panel">
+        <div class="panel-header">הגדרות כלליות</div>
+        <div class="panel-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>שם האתר</label>
+              <input type="text" value="חיות כיס" />
+            </div>
+            <div class="form-group">
+              <label>כתובת RSS</label>
+              <input type="url" value="https://feeds.example.com/hayotkiss" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="grid-column:1/-1">
+              <label>תיאור האתר</label>
+              <textarea>מנוע חיפוש חכם לפודקאסט הכלכלי המוביל בישראל</textarea>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="alert('ההגדרות נשמרו ✓')">שמור שינויים</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header" style="color:var(--danger)">אזור מסוכן</div>
+        <div class="panel-body">
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:16px">פעולות אלו אינן הפיכות — היזהרו!</p>
+          <div class="btn-row">
+            <button class="btn btn-danger" onclick="alert('הפעולה בוטלה')">🗑️ מחיקת כל האינדקס</button>
+            <button class="btn btn-danger" onclick="alert('הפעולה בוטלה')">⚠️ איפוס הגדרות</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Simulate loading
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 500);
+      }, 1200);
+    });
+
+    function showTab(name, el) {
+      ['dashboard','episodes','add','settings'].forEach(t => {
+        document.getElementById('tab-' + t).style.display = t === name ? '' : 'none';
+      });
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      if (el) el.classList.add('active');
+    }
+  </script>
+</body>
+</html>
